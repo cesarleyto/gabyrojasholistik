@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: cesarleyto/template
+  repo: cesarleyto/gabyrojasholistik
   branch: main
 
 # Carpeta de imágenes por default
