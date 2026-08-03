@@ -34,7 +34,7 @@ const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(date));
 };
 
-// SOPORTE TOTAL PARA LAS 7 REDES SOCIALES DEL FORMULARIO
+// SOPORTE TOTAL PARA REDES SOCIALES + WHATSAPP
 const getSocialSvg = (platform: string) => {
   const p = platform.toLowerCase();
   if (p.includes('facebook')) return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
@@ -44,6 +44,7 @@ const getSocialSvg = (platform: string) => {
   if (p.includes('linkedin')) return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>';
   if (p.includes('x') || p.includes('twitter')) return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>';
   if (p.includes('youtube')) return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="15" x="2" y="4.5" rx="4" ry="4"/><polygon points="10 9 15 12 10 15 10 9"/></svg>';
+  if (p.includes('whatsapp')) return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>';
   return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
 };
 ---
@@ -54,16 +55,16 @@ const getSocialSvg = (platform: string) => {
   image={post.data.heroImage}
 >
   
-  <div class="blog-post-container" style="max-width: 950px; margin: 3rem auto 6rem; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 3.5rem;">
+  <div class="blog-post-container fondo-acento" style="max-width: 950px; margin: 7rem auto 5rem; padding: 0 1.5rem; display: flex; flex-direction: column; gap: 3rem;">
     
-    <div class="post-hero-wrapper">
-      {post.data.heroImage && (
+    {post.data.heroImage && (
+      <div class="post-hero-desktop">
         <div class="hero-aspect-ratio" style={`background-image: url('${post.data.heroImage}');`}>
           <div class="hero-dark-gradient"></div>
           
           <div class="hero-text-overlay">
             {post.data.category && (
-              <span class="btn-principal tag-mono" style="padding: 0.4rem 1.2rem; font-size: 0.75rem; pointer-events: none; margin-bottom: 1.5rem; align-self: flex-start; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+              <span class="card-badge tag-mono">
                 {post.data.category}
               </span>
             )}
@@ -72,18 +73,37 @@ const getSocialSvg = (platform: string) => {
             </h1>
           </div>
         </div>
+      </div>
+    )}
+
+    <div class="post-hero-mobile">
+      {post.data.heroImage && (
+        <div class="mobile-image-wrapper">
+          <img src={post.data.heroImage} alt={post.data.title} class="mobile-hero-img" />
+        </div>
       )}
+      
+      <div class="mobile-header-meta">
+        {post.data.category && (
+          <span class="card-badge tag-mono">
+            {post.data.category}
+          </span>
+        )}
+        <h1 class="mobile-hero-title">
+          {post.data.title}
+        </h1>
+      </div>
     </div>
 
-    <main class="content-block fondo-default" style="border-radius: var(--radius-card, 24px); box-shadow: 0 15px 40px rgba(0,0,0,0.04); padding: 4rem 3.5rem;">
+    <main class="content-block fondo-acento">
       <article class="contenido-cliente">
         <Content />
       </article>
 
       {/* FECHA DE PUBLICACIÓN */}
       {post.data.pubDate && (
-        <div style="margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.06); text-align: left;">
-          <p style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--texto-default-color); opacity: 0.6; margin: 0;">
+        <div class="post-date-wrapper">
+          <p class="post-date-text">
             Fecha de publicación: {formatDate(post.data.pubDate)}
           </p>
         </div>
@@ -91,8 +111,8 @@ const getSocialSvg = (platform: string) => {
     </main>
 
     <div style="display: flex; justify-content: center; width: 100%;">
-      <a href="/blog" class="btn-outline">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg);">
+      <a href="/blog" class="btn-principal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg); width: 18px; height: 18px;">
           <line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>
         </svg>
         <span>Volver al Blog</span>
@@ -100,27 +120,24 @@ const getSocialSvg = (platform: string) => {
     </div>
 
     {autorData && (
-      <section class="author-capsule fondo-default">
+      <section class="author-capsule fondo-acento">
         
-        {/* AVATAR (Aumentado a 120px) */}
         <div class="author-avatar-container">
           <img src={autorData.avatar || "/assets/images/autores/placeholder.jpg"} alt={autorData.name} class="author-avatar" />
         </div>
 
-        {/* INFO DEL AUTOR */}
         <div class="author-text-container">
-          <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--titulos-default-color);">
+          <span class="author-label tag-mono">
             Publicado por
           </span>
-          <h3 style="font-size: 1.35rem; margin: 0; color: var(--titulos-default-color);">
+          <h3 class="author-name">
             {autorData.name}
           </h3>
-          <p style="font-size: 0.95rem; opacity: 0.8; margin: 0; color: var(--texto-default-color);">
+          <p class="author-desc">
             {autorData.description}
           </p>
         </div>
 
-        {/* REDES SOCIALES DEL AUTOR */}
         {autorData.redes && autorData.redes.length > 0 && (
           <div class="author-socials-container">
             {autorData.redes.map((redObj: any) => (
@@ -136,68 +153,244 @@ const getSocialSvg = (platform: string) => {
 </Layout>
 
 <style>
-  /* PORTADA 16:9 */
-  .post-hero-wrapper {
-    width: 100%; border-radius: var(--radius-card, 24px); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+  /* === HERO DESKTOP === */
+  .post-hero-desktop {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-card, 24px);
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
   }
   .hero-aspect-ratio {
-    width: 100%; padding-top: 56.25%; position: relative; background-size: cover; background-position: center; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 */
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
-  .post-hero-wrapper:hover .hero-aspect-ratio { transform: scale(1.04); }
+  .post-hero-desktop:hover .hero-aspect-ratio {
+    transform: scale(1.04);
+  }
   .hero-dark-gradient {
-    position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0, 0, 0, 0.85) 100%); z-index: 1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0, 0, 0, 0.85) 100%);
+    z-index: 1;
   }
   .hero-text-overlay {
-    position: absolute; bottom: 0; left: 0; width: 100%; padding: 3.5rem 3.5rem; z-index: 2; display: flex; flex-direction: column; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 3.5rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
-  .post-hero-wrapper:hover .hero-text-overlay { transform: scale(0.96); }
+  .post-hero-desktop:hover .hero-text-overlay {
+    transform: scale(0.98);
+  }
   .hero-title {
-    color: #FFFFFF !important; font-size: clamp(1.8rem, 4vw, 2.8rem); text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); margin: 0; text-wrap: balance;
+    color: #ffffff !important;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    margin: 0;
+    text-wrap: balance;
+    line-height: 1.2;
   }
 
-  /* ESTRUCTURA BASE DEL MÓDULO DE AUTOR (DESKTOP) */
+  /* === HERO MOBILE (Oculto en Desktop) === */
+  .post-hero-mobile {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .mobile-image-wrapper {
+    width: 100%;
+    border-radius: var(--radius-card, 24px);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  .mobile-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  .mobile-header-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .mobile-hero-title {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    color: var(--titulos-color-acento);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* === BADGES DE CATEGORÍA (Mismo estilo que index.astro) === */
+  .card-badge {
+    background-color: var(--color-acento2);
+    color: var(--texto-color-acento2);
+    padding: 0.4rem 1.2rem;
+    border-radius: var(--radius-capsule);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  /* === BLOQUE DE CONTENIDO === */
+  .content-block {
+    border-radius: var(--radius-card, 24px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    padding: 4rem 3.5rem;
+  }
+  
+  .post-date-wrapper {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    text-align: left;
+  }
+  .post-date-text {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--texto-color-acento);
+    opacity: 0.6;
+    margin: 0;
+  }
+
+  /* === ESTILOS INTERNOS MARKDOWN === */
+  .contenido-cliente :global(p) {
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--texto-color-acento);
+  }
+  .contenido-cliente :global(h2), .contenido-cliente :global(h3) {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--titulos-color-acento);
+  }
+  .contenido-cliente :global(img) {
+    border-radius: 12px;
+    margin: 2rem 0;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+  .contenido-cliente :global(ul), .contenido-cliente :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--texto-color-acento);
+  }
+  .contenido-cliente :global(li) {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  /* === MÓDULO DE AUTOR === */
   .author-capsule {
-    border-radius: var(--radius-card, 24px); 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.04); 
-    padding: 2.5rem; 
-    display: flex; 
-    align-items: center; 
+    border-radius: var(--radius-card, 24px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
     gap: 2rem;
   }
   .author-avatar-container {
-    width: 120px; /* Aumentado a 96px como pediste */
-    height: 120px; 
-    border-radius: 9999px; 
-    overflow: hidden; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    width: 120px;
+    height: 120px;
+    border-radius: 9999px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     flex-shrink: 0;
   }
-  .author-avatar { width: 100%; height: 100%; object-fit: cover; }
-  .author-text-container { flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
-  .author-socials-container { display: flex; gap: 0.6rem; align-items: center; }
+  .author-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .author-text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .author-label {
+    font-size: 0.75rem;
+    color: var(--color-acento2);
+  }
+  .author-name {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--titulos-color-acento);
+  }
+  .author-desc {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin: 0;
+    color: var(--texto-color-acento);
+  }
+  .author-socials-container {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
 
-  /* EFECTO BRINCO REDES SOCIALES AUTOR */
   .social-author-link {
-    width: 40px; height: 40px; border-radius: var(--radius-sm, 8px); background-color: var(--default-color-similar); display: inline-flex; align-items: center; justify-content: center; color: var(--texto-default-color);
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background-color: rgba(187, 142, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-acento2);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s, color 0.2s !important;
   }
   .social-author-link:hover {
-    transform: scale(1.1) translateY(-2px); background-color: var(--color-acento) !important; color: var(--texto-color-acento) !important;
+    transform: scale(1.1) translateY(-2px);
+    background-color: var(--color-acento2) !important;
+    color: #ffffff !important;
   }
-  .social-author-link :global(svg) { width: 18px; height: 18px; }
-  
-  /* ESTILOS INTERNOS MARKDOWN */
-  .contenido-cliente :global(p) { margin-bottom: 1.5rem; font-size: 1.1rem; opacity: 0.9; }
-  .contenido-cliente :global(h2), .contenido-cliente :global(h3) { margin-top: 2.5rem; margin-bottom: 1rem; }
-  .contenido-cliente :global(img) { border-radius: var(--radius-sm, 8px); margin: 2rem 0; width: 100%; }
+  .social-author-link :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
 
-  /* RESPONSIVE: DETALLES DE COLAPSADO AL CENTRO PARA AUTOR */
-
+  /* === RESPONSIVE BREAKPOINTS === */
   @media (max-width: 768px) {
+    .post-hero-desktop {
+      display: none !important;
+    }
+    .post-hero-mobile {
+      display: flex !important;
+    }
+
+    .blog-post-container {
+      margin-top: 5rem !important;
+      padding: 0 1rem !important;
+      gap: 2rem !important;
+    }
+
+    .content-block {
+      padding: 2.5rem 1.5rem !important;
+    }
+
     .author-capsule {
       flex-direction: column;
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 2.5rem 1.5rem;
       gap: 1.5rem;
     }
     .author-text-container {

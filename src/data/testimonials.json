@@ -1,0 +1,41 @@
+{
+  "title": "Testimonios",
+  "testimonials": [
+    {
+      "quote": "No sabes cuánta paz trajo a mi corazón conectar con mi hermano y mi abuela. Me quitaste un peso de encima que venía cargando desde hace mucho tiempo. Lloré de paz.",
+      "author": "Consulta Médium",
+      "country": "México",
+      "flag": "🇲🇽"
+    },
+    {
+      "quote": "Estuvo todo muy exacto, muy preciso y me dejas en paz. Gracias de verdad por tu don, el tiempo y el espacio; al fin podré dormir tranquila.",
+      "author": "Paciente de Psicología y Consulta Médium",
+      "country": "México",
+      "flag": "🇲🇽"
+    },
+    {
+      "quote": "¡Siento el corazón calientito y lleno de amor! Saber que mi abuelita, mis tíos y todo mi equipo espiritual siempre nos acompañan y nos guían es un regalo enorme.",
+      "author": "Consulta Médium",
+      "country": "Estados Unidos",
+      "flag": "🇺🇸"
+    },
+    {
+      "quote": "Fue una sesión hermosa. Te agradezco por haber sido el puente para esta conexión; mi mamá y yo nos quedamos muy tranquilas, llenas de amor y sabiendo que ella está bien.",
+      "author": "Consulta Médium",
+      "country": "Colombia",
+      "flag": "🇨🇴"
+    },
+    {
+      "quote": "Sanar no es un camino fácil, pero con Gaby encontré el espacio seguro que necesitaba para dejar ir el dolor y abrazar mi presente con amor y gratitud.",
+      "author": "Consultante de ThetaHealing",
+      "country": "Argentina",
+      "flag": "🇦🇷"
+    },
+    {
+      "quote": "El nivel de empatía y profesionalismo que manejas en cada sesión me dio la confianza para trabajar mis miedos más profundos. Ha sido una transformación total.",
+      "author": "Paciente de Desarrollo Personal",
+      "country": "México",
+      "flag": "🇲🇽"
+    }
+  ]
+}

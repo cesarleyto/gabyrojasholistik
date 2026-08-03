@@ -1,0 +1,233 @@
+---
+/* src/pages/libros.astro */
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Libros">
+  
+  <main class="fondo-default">
+    <div style="height: 80px; width: 100%;"></div>
+    
+    <div class="libros-container">
+      
+      <div class="page-header text-center">
+        <h1 class="page-title">Libros</h1>
+        <p class="page-subtitle">Acompáñame en tu viaje hacia el autoconocimiento y la sanación.</p>
+      </div>
+
+      <article class="libro-card fondo-acento">
+        <div class="libro-grid">
+          
+          <div class="libro-media-col">
+            <img 
+              src="/assets/images/caminoalser.webp" 
+              alt="Camino al Ser - Libro de Gabriela Rojas" 
+              class="libro-img" 
+              loading="eager" 
+            />
+            
+            <div class="libro-actions">
+              <a href="https://www.amazon.com.mx/Camino-Spanish-Gabriela-Rojas-M%C3%A9ndez/dp/B0FRYLD2TN" target="_blank" rel="noopener noreferrer" class="btn-principal">
+                <span>Amazon México</span>
+              </a>
+              <a href="https://tiendaenlinea.profetica.com.mx/libro/camino-al-ser_1039824" target="_blank" rel="noopener noreferrer" class="btn-principal">
+                <span>Tienda Profética</span>
+              </a>
+            </div>
+          </div>
+          
+          <div class="libro-content-col">
+            <h2 class="libro-title">Camino al Ser</h2>
+            <div class="libro-body">
+              <p>Este libro es una invitación a emprender el viaje más importante de tu vida: el viaje hacia tu interior. A través de estas páginas, te propongo un reencuentro profundo con tu esencia, alejándonos del ruido externo para escuchar la voz de tu propia verdad. Es momento de recordar quién eres realmente, más allá de las expectativas y las heridas del pasado.</p>
+              
+              <p>Cada capítulo está diseñado como un peldaño en tu desarrollo personal y espiritual, guiándote para que integres tu mente, tu cuerpo y tu alma. A medida que avanzas, descubrirás cómo la sanación no se trata de convertirte en alguien más, sino de despojarte de lo que no te pertenece para habitar tu vida con plenitud y consciencia. Hoy, te ofrezco esta brújula para acompañarte en tu propio camino al Ser.</p>
+              
+              <p class="tag-mono format-tag">Formato físico y digital disponible bajo demanda en Amazon y Profética.</p>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <article class="libro-card fondo-acento">
+        <div class="libro-grid">
+          
+          <div class="libro-media-col">
+            <img 
+              src="/assets/images/soltando.webp" 
+              alt="Soltando Cadenas - Libro de Gabriela Rojas" 
+              class="libro-img" 
+              loading="lazy" 
+            />
+            
+            <div class="libro-actions">
+              <a href="https://www.amazon.com.mx/Soltando-Cadenas-Spanish-Gabriela-M%C3%A9ndez/dp/B0CVLT7MWD" target="_blank" rel="noopener noreferrer" class="btn-principal">
+                <span>Amazon México</span>
+              </a>
+              <a href="https://www.escritoresmxi.org/libreriadigital/gabriela-rojas-soltando-cadenas/" target="_blank" rel="noopener noreferrer" class="btn-principal">
+                <span>Tienda EscritoresMXI</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="libro-content-col">
+            <h2 class="libro-title">Soltando Cadenas</h2>
+            <div class="libro-body">
+              <p>Es un método practico y rápido, con pasos a seguir para poder soltar esas cadenas emocionales que te atan a tus relaciones tóxicas. Es momento de responsabilizarte y ser el protagonista de tu vida, identificando y cambiando los patrones que generan la repetición de tus relaciones insanas una y otra vez.</p>
+              
+              <p>Cada paso del libro es un despertar de tu conocimiento interno, una vez que inicias no hay vuelta atrás, tus futuras elecciones serán distintas y estarán alineadas a lo que realmente eres y quieres tener. Hoy con amor, te entrego este método y en cada página te acompaño a soltar tus cadenas.</p>
+              
+              <p class="tag-mono format-tag">Formato físico y digital disponible bajo demanda en Amazon y EscritoresMXI.</p>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+    </div>
+    
+    <Cta />
+  </main>
+  
+</Layout>
+
+<style>
+  .libros-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem 6rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  /* --- Encabezado --- */
+  .page-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    margin-bottom: 0.5rem;
+    color: var(--titulos-default-color);
+  }
+  
+  .page-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.85;
+  }
+
+  /* --- Tarjeta Única Unificada --- */
+  .libro-card {
+    width: 100%;
+    border-radius: var(--radius-card, 24px);
+    padding: 3.5rem;
+    overflow: hidden;
+    /* Unificamos todo el contenido en un único bloque continuo */
+  }
+
+  .libro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  /* --- Columna de Imagen + Botones --- */
+  .libro-media-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .libro-img {
+    width: 100%;
+    max-width: 600px; /* Imagen más grande */
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+  }
+  
+  .libro-img:hover {
+    transform: translateY(-8px);
+  }
+
+  .libro-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 520px;
+  }
+
+  /* --- Columna de Texto --- */
+  .libro-content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .libro-title {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .libro-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
+
+  .format-tag {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.06);
+    display: inline-block;
+    width: fit-content;
+    border-radius: 6px;
+    opacity: 0.9;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 1024px) {
+    .libro-card {
+      padding: 2.5rem;
+    }
+    .libro-grid {
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .libros-container {
+      padding: 1rem 1.5rem 4rem 1.5rem;
+      gap: 3.5rem;
+    }
+
+    .libro-card {
+      padding: 2rem 1.5rem;
+    }
+    
+    .libro-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .libro-actions {
+      flex-direction: column;
+    }
+    
+    .libro-actions .btn-principal {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

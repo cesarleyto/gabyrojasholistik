@@ -1,11 +1,15 @@
 {
-  "title": "¿Es momento de su esquema de vacunación?",
-  "description": "Mantén a tus pequeños protegidos contra enfermedades prevenibles. Contamos con todas las vacunas del esquema nacional y biológicos complementarios sin dolor.",
-  "image": "/assets/images/image.jpg.webp.jpeg",
+  "title": "Soy Gabriela Rojas Méndez, Psicóloga Médium",
+  "description": "Mi camino profesional tiene bases sólidas: me formé como psicóloga especialista, dedicando años al estudio del desarrollo personal y la salud mental para brindar a mis consultantes un acompañamiento estructurado, responsable y ético.\n\nSin embargo, mi propia experiencia vital me llevó a expandir mis horizontes. Comprendí que la ciencia y la espiritualidad no son caminos opuestos, sino que, cuando se integran con respeto, son el puente hacia una sanación total. Por ello, sumé a mi práctica herramientas como el ThetaHealing®️ y desarrollé mi vocación como médium profesional.\n\nHoy aspiro a ser ese puente seguro entre lo visible y lo sutil. Acompaño a las personas en momentos de duelo, búsqueda de sentido y crecimiento, conectando la mente con el alma.",
+  "image": "/assets/images/gabrielarojas-autora.jpeg",
   "botones": [
     {
-      "texto": "Revisar Cartilla",
-      "url": "/blog/importancia-vacunas-primer-ano"
+      "texto": "¡Envíame un Whatsapp!",
+      "url": "https://wa.me/529711503508"
+    },
+    {
+      "texto": "Mis Libros",
+      "url": "/libros"
     }
   ]
 }

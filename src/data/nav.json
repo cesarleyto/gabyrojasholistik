@@ -6,18 +6,13 @@
       "url": "/"
     },
     {
-      "texto": "Sobre Mi",
-      "url": "/sobre-mi"
+      "texto": "Libros",
+      "url": "/libros"
     },
     {
       "texto": "Blog",
       "url": "/blog"
     }
   ],
-  "botones": [
-    {
-      "texto": "¡Agenda vía WhatsApp!",
-      "url": "https://wa.me/529710000000"
-    }
-  ]
+  "botones": []
 }

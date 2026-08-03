@@ -1,27 +1,28 @@
 /* src/styles/global.css */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Josefin+Slab:wght@400;500;600;700&family=Open+Sans:wght@400;600;800&display=swap');
 
 :root {
-  /* --- COLORES BASE --- */
-  --default-color: #ffffff;
-  --default-color-similar: #eaeaea;
+  /* --- COLORES BASE (Paleta Gaby Rojas) --- */
+  --default-color: #DABC59;
+  --default-color-similar: #FFFFFF; /* Gris súper sutil para dar respiro al blanco puro */
   
-  --color-acento: #eaeaea;
-  --color-acento2: #ffffff;
+  --color-acento: #ffffff; /* Dorado principal de Gaby */
+  --color-acento2: #BB8E00; /* Dorado oscuro/mostaza para hover o contraste fuerte */
 
   /* --- TÍTULOS --- */
-  --titulos-default-color: #000000;
-  --titulos-color-acento: #000000;
-  --titulos-color-acento2: #000000;
+  --titulos-default-color: #ffffff;
+  --titulos-color-acento: #DABC59; /* Sobre fondo dorado claro, el negro lee mejor */
+  --titulos-color-acento2: #DABC59; /* Sobre fondo dorado oscuro, el blanco resalta */
 
   /* --- TEXTOS --- */
-  --texto-default-color: #000000;
+  --texto-default-color: #ffffff;
   --texto-color-acento: #000000;
-  --texto-color-acento2: #000000;
+  --texto-color-acento2: #ffffff;
 
-  /* --- FUENTES --- */
-  --font-main: 'Montserrat', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  /* --- FUENTES (Estilo Holístico) --- */
+  --font-main: 'Josefin Slab', serif; /* La tipografía elegante para textos largos */
+  --font-mono: 'Josefin Sans', sans-serif; /* Usada para botones, etiquetas y acentos */
+  --font-titulos: 'Josefin Sans', sans-serif; /* Para que los títulos tengan ese impacto */
 
   /* --- FORMAS --- */
   --radius-capsule: 9999px;
@@ -34,7 +35,6 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  /* Por facto, el fondo del body es el similar */
   background-color: var(--default-color-similar);
   color: var(--texto-default-color);
   font-family: var(--font-main);
@@ -43,7 +43,7 @@ body {
 }
 
 /* ==========================================
-   LAS MÁQUINAS DE CONTRASTE (La magia de tu lógica)
+   LAS MÁQUINAS DE CONTRASTE Y ENLACES
    ========================================== */
 
 /* 1. Fondo Default */
@@ -54,9 +54,11 @@ body {
   --btn-bg: var(--color-acento);
   --btn-text: var(--texto-color-acento);
   --outline-color: var(--texto-default-color);
+  --link-color: #ffffff;
+  --link-hover-color: var(--texto-color-acento);
 }
 
-/* 2. Fondo Acento */
+/* 2. Fondo Acento (Blanco) */
 .fondo-acento {
   background-color: var(--color-acento);
   color: var(--texto-color-acento);
@@ -64,9 +66,11 @@ body {
   --btn-bg: var(--color-acento2); /* Botón contraste */
   --btn-text: var(--texto-color-acento2);
   --outline-color: var(--texto-color-acento);
+  --link-color: var(--color-acento2);
+  --link-hover-color: var(--default-color);
 }
 
-/* 3. Fondo Acento 2 */
+/* 3. Fondo Acento 2 (Dorado Oscuro) */
 .fondo-acento2 {
   background-color: var(--color-acento2);
   color: var(--texto-color-acento2);
@@ -74,45 +78,69 @@ body {
   --btn-bg: var(--color-acento); /* Botón contraste */
   --btn-text: var(--texto-color-acento);
   --outline-color: var(--texto-color-acento2);
+  --link-color: #ffffff;
+  --link-hover-color: var(--default-color);
 }
 
 /* Títulos automáticos según el fondo donde vivan */
 h1, h2, h3, h4 {
-  font-family: var(--font-main);
+  font-family: var(--font-titulos);
   color: var(--titulo-actual, var(--titulos-default-color));
   font-weight: 700;
   line-height: 1.2;
 }
 
 /* ==========================================
+   ESTILOS DE ENLACES DE TEXTO (Markdown / Blog únicamente)
+   ========================================== */
+/* Usamos :not([class]) para aislar SOLO los links de lectura dentro de Markdown
+   sin interferir jamás con los botones, redes o navegación */
+
+a:not([class]),
+.contenido-cliente a:not([class]) {
+  color: var(--link-color, var(--color-acento2));
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 600;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:not([class]):hover,
+.contenido-cliente a:not([class]):hover {
+  color: var(--link-hover-color, var(--default-color));
+  text-decoration-color: var(--link-hover-color, var(--default-color));
+}
+
+/* ==========================================
    BOTONES Y COMPONENTES
    ========================================== */
 
-/* Botón Principal: Hereda la lógica del fondo donde esté */
+/* Botón Principal */
 .btn-principal {
   display: inline-flex; align-items: center; gap: 0.6rem;
   background-color: var(--btn-bg, var(--color-acento));
-  color: var(--btn-text, var(--texto-color-acento));
+  color: var(--btn-text, var(--texto-color-acento)) !important;
   font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;
-  text-transform: uppercase; text-decoration: none;
+  text-transform: uppercase; text-decoration: none !important;
   padding: 0.8rem 1.5rem; border-radius: var(--radius-capsule);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto Brinco */
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: none; cursor: pointer;
 }
-.btn-principal:hover { transform: scale(1.05); }
+.btn-principal:hover { transform: scale(1.05); color: var(--btn-text, var(--texto-color-acento)) !important; }
 
 /* Botón Outline */
 .btn-outline {
   display: inline-flex; align-items: center; gap: 0.6rem;
   background-color: transparent;
-  color: var(--outline-color, var(--texto-default-color));
+  color: var(--outline-color, var(--texto-default-color)) !important;
   border: 2px solid var(--outline-color, var(--texto-default-color));
   font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem;
-  text-transform: uppercase; text-decoration: none;
+  text-transform: uppercase; text-decoration: none !important;
   padding: 0.75rem 1.5rem; border-radius: var(--radius-capsule);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.btn-outline:hover { transform: scale(1.05); }
+.btn-outline:hover { transform: scale(1.05); color: var(--outline-color, var(--texto-default-color)) !important; }
 
 /* SVG heredan el color del texto del botón */
 .btn-principal svg, .btn-outline svg {
@@ -130,7 +158,6 @@ h1, h2, h3, h4 {
 .nav-capsule {
   background-color: var(--default-color);
   border-radius: var(--radius-capsule);
-  /* Sombra al 50% del texto-default-color (negro) */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
   display: inline-flex; align-items: center;
   gap: 2rem; padding: 0.5rem 0.5rem 0.5rem 2rem;
@@ -138,17 +165,18 @@ h1, h2, h3, h4 {
 }
 
 .nav-link {
-  font-family: var(--font-main); font-weight: 600; font-size: 0.95rem;
-  color: var(--texto-default-color); text-decoration: none;
+  font-family: var(--font-mono); font-weight: 600; font-size: 0.95rem;
+  color: var(--texto-default-color); text-decoration: none !important;
   transition: color 0.2s ease;
 }
 .nav-link:hover, .nav-link.active {
-  color: var(--titulos-default-color);
+  color: var(--color-acento2);
 }
 
 .social-nav-link {
   color: var(--titulos-default-color);
   transition: transform 0.2s ease; display: inline-flex;
+  text-decoration: none !important;
 }
 .social-nav-link:hover { transform: scale(1.1); }
 .social-nav-link svg { width: 20px; height: 20px; }
@@ -187,7 +215,6 @@ h1, h2, h3, h4 {
   }
   .mobile-menu-modal.open .mobile-menu-content { transform: translateY(0); }
   
-  /* Textos al 75% y alineados a la izquierda */
   .mobile-menu-content .nav-link { font-size: 1.2rem; text-align: left; width: 100%; display: block; }
   .mobile-menu-content .btn-principal { font-size: 0.8rem; width: 100%; justify-content: flex-start; }
   

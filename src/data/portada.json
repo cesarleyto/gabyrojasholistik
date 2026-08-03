@@ -1,11 +1,15 @@
 {
-  "title": "Cuidados para tu pequeño",
-  "description": "Atención pediátrica integral desde los primeros días de vida hasta la adolescencia. Tu tranquilidad y el sano desarrollo de tus pequeños son mi máxima prioridad.",
-  "image": "/assets/images/Arzt.jpg",
+  "title": "Conectemos tu ser al mundo espiritual.",
+  "description": "A través del rigor psicológico, la conexión espiritual Médium y la sanación energética ThetaHealing®️, te guío en un proceso integral para encontrar paz y alinear tu mente, cuerpo y espíritu.",
+  "image": "/assets/images/gabrielarojasmedium.webp",
   "botones": [
     {
-      "texto": "Conocer Servicios",
-      "url": "/sobre-mi"
+      "texto": "¡Envíame un Whatsapp!",
+      "url": "https://wa.me/529711503508"
+    },
+    {
+      "texto": "Mis Libros",
+      "url": "/libros"
     }
   ]
 }

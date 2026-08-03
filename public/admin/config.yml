@@ -40,7 +40,7 @@ collections:
             widget: "list"
             required: false
             fields:
-              - { label: "Red", name: "red", widget: "select", options: ["Facebook", "Instagram", "TikTok", "Spotify", "LinkedIn", "X", "YouTube"] }
+              - { label: "Red", name: "red", widget: "select", options: ["Facebook", "Instagram", "TikTok", "Spotify", "LinkedIn", "X", "YouTube", "WhastApp"] }
               - { label: "URL de la cuenta", name: "url", widget: "string" }
 
       - label: "Navegación (Menú)"

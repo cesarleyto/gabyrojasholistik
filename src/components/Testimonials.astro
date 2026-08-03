@@ -1,0 +1,187 @@
+---
+/* src/components/Testimonials.astro */
+import data from '../data/testimonials.json';
+
+const { title, testimonials } = data;
+---
+
+<section class="testimonials-module fondo-default">
+  
+  <div class="text-center">
+    <h2 class="section-title">{title}</h2>
+  </div>
+
+  <div class="testimonials-grid" id="testimonialsGrid">
+    {testimonials.map((testimonio: any, index: number) => (
+      <div class="chat-bubble testimonial-item" data-index={index}>
+        <p class="chat-text">"{testimonio.quote}"</p>
+        <div class="chat-meta">
+          <span class="chat-author">{testimonio.author}</span>
+          <span class="chat-flag" title={testimonio.country}>{testimonio.flag}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="load-more-container" id="loadMoreContainer">
+    <button id="loadMoreBtn" class="btn-outline">
+      <span>Cargar más</span>
+    </button>
+  </div>
+
+</section>
+
+<script>
+  const grid = document.getElementById('testimonialsGrid');
+  const items = Array.from(grid?.querySelectorAll('.testimonial-item') || []);
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const loadMoreContainer = document.getElementById('loadMoreContainer');
+
+  let isMobile = window.innerWidth <= 768;
+  let itemsToShow = isMobile ? 3 : 6;
+  const step = isMobile ? 3 : 6;
+  let userExpanded = false;
+
+  const updateVisibility = () => {
+    items.forEach((item, index) => {
+      if (index < itemsToShow) {
+        (item as HTMLElement).style.display = 'block';
+      } else {
+        (item as HTMLElement).style.display = 'none';
+      }
+    });
+
+    if (itemsToShow >= items.length) {
+      if (loadMoreContainer) loadMoreContainer.style.display = 'none';
+    } else {
+      if (loadMoreContainer) loadMoreContainer.style.display = 'flex';
+    }
+  };
+
+  loadMoreBtn?.addEventListener('click', () => {
+    userExpanded = true;
+    itemsToShow += step;
+    updateVisibility();
+  });
+
+  // Initial execution
+  updateVisibility();
+
+  // Adjust on resize if the user hasn't clicked "Cargar más"
+  window.addEventListener('resize', () => {
+    if (!userExpanded) {
+      const newIsMobile = window.innerWidth <= 768;
+      if (newIsMobile !== isMobile) {
+        isMobile = newIsMobile;
+        itemsToShow = isMobile ? 3 : 6;
+        updateVisibility();
+      }
+    }
+  });
+</script>
+
+<style>
+  .testimonials-module {
+    padding: 6rem 1.5rem;
+    margin: 0rem auto;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .text-center {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin: 0;
+    text-align: center;
+  }
+
+  /* --- Grid de Testimonios --- */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  /* --- Estética de Chat Bubble --- */
+  .chat-bubble {
+    background-color: var(--default-color-similar, #ffffff);
+    color: var(--texto-color-acento);
+    padding: 2.5rem;
+    border-radius: 24px 24px 24px 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .chat-bubble:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .chat-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    border-width: 15px 15px 0 0;
+    border-style: solid;
+    border-color: var(--default-color-similar, #ffffff) transparent transparent transparent;
+  }
+
+  .chat-text {
+    font-family: var(--font-main);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .chat-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 1.25rem;
+  }
+
+  .chat-author {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--color-acento2, #BB8E00);
+  }
+
+  .chat-flag {
+    font-size: 1.5rem;
+  }
+
+  /* --- Botón Cargar Más --- */
+  .load-more-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    .testimonials-module {
+      padding: 4rem 1.5rem;
+    }
+    
+    .chat-bubble {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>
